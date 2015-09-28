@@ -13,11 +13,10 @@
     "path": "^0.4.9",
     "backbone": "~1.2.3",
     "bootstrap-sass": ">=3.3.5",
-    "underscore": "~1.8.3"
+    "underscore": "~1.8.3",
+    "jquery": "~2.1.4"
   },
   "devDependencies": {
-    "backbone": "~1.2.3",
-    "bootstrap-sass": ">=3.3.5",
     "browserify": "^4.2.3",
     "connect-modrewrite": "^0.7.9",
     "es5-shim": "^4.0.1",
@@ -29,7 +28,6 @@
     "grunt-contrib-copy": "~0.5.0",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-hapi": "^0.8.1",
-    "grunt-sass": "~0.15.0",
-    "underscore": "~1.8.3"
+    "grunt-sass": "~0.15.0"
   }
 }
