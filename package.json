@@ -1,18 +1,23 @@
 {
-  "name": "base-frontend-project",
+  "name": "pomodoro",
   "version": "0.0.1",
-  "description": "Bloc skeleton project for a single page application",
+  "description": "pomodoro - timer",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
-  "author": "Bloc and Nick Ferraro",
+  "author": "SamEureka",
   "license": "ISC",
   "dependencies": {
     "hapi": "^7.5.0",
-    "path": "^0.4.9"
+    "path": "^0.4.9",
+    "backbone": "~1.2.3",
+    "bootstrap-sass": ">=3.3.5",
+    "underscore": "~1.8.3"
   },
   "devDependencies": {
+    "backbone": "~1.2.3",
+    "bootstrap-sass": ">=3.3.5",
     "browserify": "^4.2.3",
     "connect-modrewrite": "^0.7.9",
     "es5-shim": "^4.0.1",
@@ -24,6 +29,7 @@
     "grunt-contrib-copy": "~0.5.0",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-hapi": "^0.8.1",
-    "grunt-sass": "~0.15.0"
+    "grunt-sass": "~0.15.0",
+    "underscore": "~1.8.3"
   }
 }
