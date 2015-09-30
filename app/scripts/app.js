@@ -1,51 +1,36 @@
 // Global variables
-var interval = null;
-var time = 65;
-var onBreak = false;
+var interval = null,
+    time = 65,
+    onBreak = false;
 
-// Starts the work timer interval and calls workTimer function
-var startWork = function(){
-  interval = setInterval(workTimer, 1000);
-  buttonSwap('reset');
-};
+// Starts the interval, calls timer function 
+var startTimer = function(){
+    interval = setInterval(timer, 1000);
+    buttonSwap('reset');
+}
 
-// Starts the break timer interval and calls breakTimer
-var startBreak = function(){  
-  interval = setInterval(breakTimer, 1000);
-  buttonSwap('reset');
-};
-
-// Decrements work time. Display the remaining time
-var workTimer = function(){
-  time === 0 ? setBreak() : time--;
+// Checks the onBreak variable, decrements time, 
+// sets break or resets, calls display function
+var timer = function(){
+  time === 0 ? reset() : time--;
   displayTime(time);
 };
 
-// Decrements break time. Display it... 
-var breakTimer = function(){
-  time === 0 ? resetTimer() : time--;
-  displayTime(time);
-};
-
-// Resets the interval and display
-var resetTimer = function(){
+var reset = function(){
   clearInterval(interval);
-  time = 65;
-  onBreak = false;
+  if (time === 0 && onBreak){
+    buttonSwap('work');
+  } else if (time === 0 && !onBreak){
+    buttonSwap('break');
+   } else if (!onBreak){
+    buttonSwap('work')
+  } else {
+    buttonSwap('break');
+  }
   displayTime(time);
-  buttonSwap('work');
 };
 
-// Set up the break
-var setBreak = function(){
-  clearInterval(interval);
-  time = 10;
-  onBreak = true;
-  displayTime(time);
-  buttonSwap('break');
-};
-
-// Converts total seconds into minutes and seconds in the proper display format -XX:XX
+// Converts total seconds into minutes and seconds in the desired display format
 function formatTime(seconds){
     var min = Math.floor(seconds/60);
     var sec = Math.floor(seconds%60);
@@ -63,13 +48,17 @@ function displayTime(time){
 function buttonSwap(type){
   switch (type) {
     case 'work':
-      $('#btn').attr({'class': 'btn btn-md btn-primary btn-block', value: 'Work', onclick: 'startWork()'});
+      $('#btn').attr({'class': 'btn btn-md btn-primary btn-block', value: 'Work', onclick: 'startTimer()'});
+      time = 65;
+      onBreak = false;
       break;
     case 'break':
-      $('#btn').attr({'class': 'btn btn-md btn-success btn-block', value: 'Break', onclick: 'startBreak()'});
+      $('#btn').attr({'class': 'btn btn-md btn-success btn-block', value: 'Break', onclick: 'startTimer()'});
+      time = 10;
+      onBreak = true;
       break;
     case 'reset':
-      $('#btn').attr({'class': 'btn btn-md btn-danger btn-block', value: 'Reset', onclick:'resetTimer()'});
+      $('#btn').attr({'class': 'btn btn-md btn-danger btn-block', value: 'Reset', onclick:'reset()'});
       // Looking for a better way to do this...
       // $('#btn').addClass('btn-danger').removeClass('btn-primary','btn-success').attr({value: 'Reset', onclick:'resetTimer()'});
       break;
