@@ -1,7 +1,3 @@
-// Buzz defaults
-// buzz.defaults.formats = ['mp3'];
-// buzz.defaults.preload = 'metadata';
-
 // Global variables
 var interval = null,
     time = 65,
@@ -64,7 +60,6 @@ function displayTime(time){
 
 function playSound(){
 alarm.play();
-console.log(alarm.getDuration());
 }
 
 // Swaps the button and click
@@ -83,8 +78,6 @@ function buttonSwap(type){
       break;
     case 'reset':
       $('#btn').attr({'class': 'btn btn-md btn-danger btn-block', value: 'Reset', onclick:'reset()'});
-      // Looking for a better way to do this...
-      // $('#btn').addClass('btn-danger').removeClass('btn-primary','btn-success').attr({value: 'Reset', onclick:'resetTimer()'});
       break;
     default:
       console.log("I don't have a button for: "+type);
