@@ -1,7 +1,9 @@
 // Global variables
 var interval = null,
     time = 65,
-    onBreak = false;
+    onBreak = false,
+    workUnits = 0;
+
 
 // Starts the interval, calls timer function 
 var startTimer = function(){
@@ -22,6 +24,7 @@ var reset = function(){
     buttonSwap('work');
   } else if (time === 0 && !onBreak){
     buttonSwap('break');
+    workUnits++;
    } else if (!onBreak){
     buttonSwap('work')
   } else {
@@ -39,6 +42,14 @@ function formatTime(seconds){
   return min+':'+sec;
 }
 
+function resetWork(){
+  if (workUnits > 4){workUnits = 0;}
+}
+
+function setBreakTime(){
+  if (workUnits === 4){time = 65;} else {time = 10;}
+}
+
 // Sends time to the DOM
 function displayTime(time){
  $('#displayNow').html(formatTime(time));
@@ -51,11 +62,12 @@ function buttonSwap(type){
       $('#btn').attr({'class': 'btn btn-md btn-primary btn-block', value: 'Work', onclick: 'startTimer()'});
       time = 65;
       onBreak = false;
+      resetWork();
       break;
     case 'break':
       $('#btn').attr({'class': 'btn btn-md btn-success btn-block', value: 'Break', onclick: 'startTimer()'});
-      time = 10;
       onBreak = true;
+      setBreakTime();
       break;
     case 'reset':
       $('#btn').attr({'class': 'btn btn-md btn-danger btn-block', value: 'Reset', onclick:'reset()'});
