@@ -1,8 +1,13 @@
+// Buzz defaults
+// buzz.defaults.formats = ['mp3'];
+// buzz.defaults.preload = 'metadata';
+
 // Global variables
 var interval = null,
     time = 65,
     onBreak = false,
     workUnits = 0;
+    alarm = new buzz.sound("/sounds/ring.mp3", {preload: true});
 
 
 // Starts the interval, calls timer function 
@@ -22,9 +27,11 @@ var reset = function(){
   clearInterval(interval);
   if (time === 0 && onBreak){
     buttonSwap('work');
+    playSound();
   } else if (time === 0 && !onBreak){
     buttonSwap('break');
     workUnits++;
+    playSound();
    } else if (!onBreak){
     buttonSwap('work')
   } else {
@@ -53,6 +60,11 @@ function setBreakTime(){
 // Sends time to the DOM
 function displayTime(time){
  $('#displayNow').html(formatTime(time));
+}
+
+function playSound(){
+alarm.play();
+console.log(alarm.getDuration());
 }
 
 // Swaps the button and click
