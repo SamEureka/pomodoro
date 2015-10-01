@@ -6,6 +6,8 @@ module.exports = function(grunt) {
 
     grunt.registerTask( 'run', [ 'hapi', 'watch' ]);
 
+    grunt.registerTask( 'pages', [ 'gh-pages' ]);
+
     grunt.initConfig({
         browserify: {
             dist: {
@@ -42,6 +44,7 @@ module.exports = function(grunt) {
                     './app/sass/**/*.scss',
                     './app/pages/**/*.html',
                     './app/templates/**/*.html',
+                    './app/sounds/**/*.mp3',
                     'Gruntfile.js'
                 ],
                 tasks: [
@@ -79,7 +82,17 @@ module.exports = function(grunt) {
                   src: [ './**/*.js' ],
                   dest: './dist/js',
                   cwd: './app/scripts'
+                },{
+                    expand: true,
+                    src: [ './**/*.mp3' ],
+                    dest: './dist/sounds',
+                    cwd: './app/sounds'
                 }]
+            },
+            quick: {
+                files: {
+                    './dist/CNAME': './CNAME',
+                }
             }
         },
 
@@ -94,7 +107,14 @@ module.exports = function(grunt) {
             }
         },
 
-        clean: ['./dist']
+        clean: ['./dist'],
+
+        'gh-pages': {
+            options: {
+                base: 'dist'
+            },
+            src: ['**']
+        }
     });
 
     grunt.loadNpmTasks('grunt-browserify');
@@ -104,4 +124,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-hapi');
     grunt.loadNpmTasks('grunt-sass');
     grunt.loadNpmTasks('grunt-autoprefixer');
+    grunt.loadNpmTasks('grunt-gh-pages');
 };

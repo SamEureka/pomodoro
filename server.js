@@ -8,6 +8,11 @@ var Hapi = require('hapi'),
             path: '/css/{path*}',
             handler: createDirectoryRoute('css')
         },
+        sounds: {
+            method: 'GET',
+            path: '/sounds/{path*}',
+            handler: createDirectoryRoute('sounds')
+        },
         js: {
             method: 'GET',
             path: '/js/{path*}',
@@ -32,11 +37,12 @@ var Hapi = require('hapi'),
         }
     };
 
-server.route([ routes.css, routes.js, routes.images, routes.templates, routes.spa ]);
+server.route([ routes.css, routes.sounds, routes.js, routes.images, routes.templates, routes.spa ]);
 server.start( onServerStarted );
 
 function onServerStarted() {
     console.log( 'Server running on port ', port );
+    console.log(routes);
 }
 
 function createDirectoryRoute( directory ) {

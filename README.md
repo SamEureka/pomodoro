@@ -5,10 +5,6 @@ Pomodoro
 
 
 
-Bloc Base Project
-=================
-
-A base for Bloc frontend projects.
 
 ## Configuration
 
