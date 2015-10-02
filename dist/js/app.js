@@ -3,6 +3,7 @@ var interval = null,
     time = 65,
     onBreak = false,
     workUnits = 0;
+    percentage = 100;
     alarm = new buzz.sound("/sounds/ring.mp3", {preload: true});
 
 
@@ -16,7 +17,9 @@ var startTimer = function(){
 // sets break or resets, calls display function
 var timer = function(){
   time === 0 ? reset() : time--;
-  displayTime(time);
+  // displayTime(time);
+  getPercent();
+  boom();
 };
 
 var reset = function(){
@@ -33,7 +36,7 @@ var reset = function(){
   } else {
     buttonSwap('break');
   }
-  displayTime(time);
+ // displayTime(time);
 };
 
 // Converts total seconds into minutes and seconds in the desired display format
@@ -55,7 +58,12 @@ function setBreakTime(){
 
 // Sends time to the DOM
 function displayTime(time){
- $('#displayNow').html(formatTime(time));
+  $('#displayNow').html(formatTime(time));
+ //console.log(percentage);
+}
+
+function getPercent(){
+  percentage = Math.floor((65 - time)/65 * 100);
 }
 
 function playSound(){
@@ -82,10 +90,20 @@ function buttonSwap(type){
     default:
       console.log("I don't have a button for: "+type);
   }
+}
 
+// d3 shit
+function boom(){
+var rp1 = radialProgress(document.getElementById('displayNow'))
+//.label("")
+.onClick(startTimer)
+.diameter(150)
+.value(percentage)
+.render();
 }
 
 // Sets everything up when the document is ready
 $(document).ready(function(){
-  displayTime(time);
+  //displayTime(time);
+  boom();
 });

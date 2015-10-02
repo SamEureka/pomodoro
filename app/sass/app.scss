@@ -23,3 +23,25 @@
   -webkit-justify-content : center;
   justify-content : center;
 }
+
+#radial {
+width: 200px;
+height: 200px;
+box-sizing: border-box;
+
+}
+
+#displayNow .arc {
+stroke-weight: 0.2;
+fill: red;
+
+background: none;
+}
+.arc {
+  fill: blue;
+  stroke-color: #333;
+}
+.arc2 {
+            stroke-weight:0.1;
+            fill: #3660b0;
+        }
